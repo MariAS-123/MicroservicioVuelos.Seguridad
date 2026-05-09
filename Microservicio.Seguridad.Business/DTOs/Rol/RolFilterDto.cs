@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Microservicio.Seguridad.Business.DTOs.Rol;
 
-namespace Microservicio.Seguridad.Business.DTOs.Rol
+public class RolFilterDto
 {
-    internal class RolFilterDto
-    {
-    }
+    public string? NombreRol { get; set; }
+    public string? EstadoRol { get; set; }
+    public int Page { get; set; } = 1;
+    public int PageSize { get; set; } = 20;
 }

@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Microservicio.Seguridad.DataManagement.Models;
 
-namespace Microservicio.Seguridad.DataManagement.Models
+public class UsuarioRolDataModel
 {
-    internal class UsuarioRolDataModel
-    {
-    }
+    public int IdUsuarioRol { get; set; }
+    public int IdUsuario { get; set; }
+    public int IdRol { get; set; }
+    public string EstadoUsuarioRol { get; set; } = null!;
+    public bool EsEliminado { get; set; }
+    public bool Activo { get; set; }
+    public string CreadoPorUsuario { get; set; } = null!;
+    public DateTime FechaRegistroUtc { get; set; }
+    public string? ModificadoPorUsuario { get; set; }
+    public DateTime? FechaModificacionUtc { get; set; }
 }

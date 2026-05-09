@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Microservicio.Seguridad.DataManagement.Models;
 
-namespace Microservicio.Seguridad.DataManagement.Models
+public class UsuarioRolFiltroDataModel
 {
-    internal class UsuarioRolFiltroDataModel
-    {
-    }
+    public int? IdUsuario { get; set; }
+    public int? IdRol { get; set; }
+    public bool IncluirEliminados { get; set; } = false;
+    public int PageNumber { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
 }

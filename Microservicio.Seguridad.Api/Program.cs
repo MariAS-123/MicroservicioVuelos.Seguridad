@@ -1,23 +1,52 @@
+using Microservicio.Seguridad.Api.Extensions;
+using Microservicio.Seguridad.Api.Middleware;
+using Microservicio.Seguridad.Api.Security;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 
+// Controllers
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddSingleton<ITokenBlacklistService, TokenBlacklistService>();
+
+// Versioning
+builder.Services.AddApiVersioningDocumentation();
+
+// JWT Authentication
+builder.Services.AddJwtAuthentication(builder.Configuration);
+
+// CORS
+builder.Services.AddCorsPolicy(builder.Configuration);
+
+// Swagger
+builder.Services.AddSwaggerDocumentation();
+
+// Project services (DbContext + DataManagement + Business)
+builder.Services.AddProjectServices(builder.Configuration);
+
+// Authorization
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.MapGet("/", context =>
 {
-    app.MapOpenApi();
-}
+    context.Response.Redirect("/swagger");
+    return Task.CompletedTask;
+});
 
-app.UseHttpsRedirection();
+app.UseSwaggerDocumentation();
 
+if (!app.Environment.IsDevelopment())
+    app.UseHttpsRedirection();
+
+app.UseCorsPolicy();
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.MapControllers();
 
 app.Run();

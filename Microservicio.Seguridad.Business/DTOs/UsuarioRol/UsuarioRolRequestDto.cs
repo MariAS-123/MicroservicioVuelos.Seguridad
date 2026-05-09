@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Microservicio.Seguridad.Business.DTOs.UsuarioRol;
 
-namespace Microservicio.Seguridad.Business.DTOs.UsuarioRol
+public class UsuarioRolRequestDto
 {
-    internal class UsuarioRolRequestDto
-    {
-    }
+    public int IdUsuario { get; set; }
+    public int IdRol { get; set; }
 }

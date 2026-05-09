@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
-namespace Microservicio.Seguridad.Business.DTOs.UsuarioApp
+namespace Microservicio.Seguridad.Business.DTOs.UsuarioApp;
+
+public class UsuarioAppUpdateRequestDto
 {
-    internal class UsuarioAppUpdateRequestDto
-    {
-    }
+    [JsonPropertyName("correo")]
+    public string Correo { get; set; } = null!;
+
+    [JsonPropertyName("password")]
+    public string? Password { get; set; }
 }

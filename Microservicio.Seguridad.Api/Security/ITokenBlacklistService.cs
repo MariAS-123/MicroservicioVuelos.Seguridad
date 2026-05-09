@@ -1,6 +1,7 @@
-﻿namespace Microservicio.Seguridad.Api.Security
+﻿namespace Microservicio.Seguridad.Api.Security;
+
+public interface ITokenBlacklistService
 {
-    public interface ITokenBlacklistService
-    {
-    }
+    void Blacklist(string token, DateTimeOffset expiresAtUtc);
+    bool IsBlacklisted(string token);
 }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Microservicio.Seguridad.Business.DTOs.Rol;
 
-namespace Microservicio.Seguridad.Business.DTOs.Rol
+public class RolUpdateRequestDto
 {
-    internal class RolUpdateRequestDto
-    {
-    }
+    public string NombreRol { get; set; } = null!;
+    public string? DescripcionRol { get; set; }
+    // Sin EstadoRol ni Activo — estos los maneja el DELETE
 }

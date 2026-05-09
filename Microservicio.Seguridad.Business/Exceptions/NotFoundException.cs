@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Microservicio.Seguridad.Business.Exceptions;
 
-namespace Microservicio.Seguridad.Business.Exceptions
+public class NotFoundException : BusinessException
 {
-    internal class NotFoundException
-    {
-    }
+    public NotFoundException(string message)
+        : base("RESOURCE_NOT_FOUND", message, 404) { }
 }
