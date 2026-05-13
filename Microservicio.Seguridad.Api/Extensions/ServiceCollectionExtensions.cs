@@ -30,15 +30,20 @@ public static class ServiceCollectionExtensions
             throw new InvalidOperationException(
                 $"La cadena de conexión '{ConnectionStringName}' no está configurada.");
 
+        /*   services.AddDbContext<SistemaVuelosSeguridadDBContext>(options =>
+           {
+               options.UseNpgsql(connectionString, npgsqlOptions =>
+               {
+                   npgsqlOptions.EnableRetryOnFailure(
+                       maxRetryCount: 5,
+                       maxRetryDelay: TimeSpan.FromSeconds(10),
+                       errorCodesToAdd: null);
+               });
+           });*/
+
         services.AddDbContext<SistemaVuelosSeguridadDBContext>(options =>
         {
-            options.UseNpgsql(connectionString, npgsqlOptions =>
-            {
-                npgsqlOptions.EnableRetryOnFailure(
-                    maxRetryCount: 5,
-                    maxRetryDelay: TimeSpan.FromSeconds(10),
-                    errorCodesToAdd: null);
-            });
+            options.UseNpgsql(connectionString);
         });
     }
 
