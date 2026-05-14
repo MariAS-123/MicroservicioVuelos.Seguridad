@@ -1,7 +1,9 @@
-﻿using System.Reflection;
+﻿using Microservicio.Seguridad.Business.Interfaces;
+using Microservicio.Seguridad.Business.Services;
+using Microservicio.Seguridad.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microservicio.Seguridad.DataAccess.Context;
+using System.Reflection;
 
 namespace Microservicio.Seguridad.Api.Extensions;
 
@@ -18,7 +20,7 @@ public static class ServiceCollectionExtensions
         RegisterUnitOfWork(services, "Microservicio.Seguridad.DataManagement");
         RegisterServicesByConvention(services, "Microservicio.Seguridad.DataManagement");
         RegisterServicesByConvention(services, "Microservicio.Seguridad.Business");
-
+        //services.AddScoped<IInternalSeguridadService, InternalSeguridadService>();
         return services;
     }
 
