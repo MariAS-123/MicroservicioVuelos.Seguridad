@@ -69,6 +69,8 @@ public class AuthService : IAuthService
 
     public async Task<RegisterClienteResponse> RegisterClienteAsync(RegisterClienteRequest request)
     {
+        Console.WriteLine($"[DEBUG] RegisterCliente. Username={request.Username} IdCliente={request.IdCliente}");
+
         _validator.ValidateRegisterCliente(request);
 
         // El MS Clientes ya creó el cliente y llama a este endpoint
@@ -82,7 +84,7 @@ public class AuthService : IAuthService
         {
             var usuario = await _usuarioAppService.CreateAsync(new UsuarioAppRequestDto
             {
-                IdCliente = null, // será asignado por el MS Clientes tras recibir el IdUsuario
+                IdCliente = request.IdCliente, // será asignado por el MS Clientes tras recibir el IdUsuario
                 Username = request.Username,
                 Correo = request.Correo,
                 Password = request.Password
@@ -96,7 +98,7 @@ public class AuthService : IAuthService
 
             return new RegisterClienteResponse
             {
-                IdCliente = 0, // el MS Clientes tiene el IdCliente real
+                IdCliente = request.IdCliente ?? 0,// el MS Clientes tiene el IdCliente real
                 IdUsuario = usuario.IdUsuario,
                 Username = usuario.Username,
                 RolAsignado = "CLIENTE"
